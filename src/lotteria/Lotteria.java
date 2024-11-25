@@ -16,9 +16,9 @@ public class Lotteria {
      */
     public static void main(String[] args) {
         // Scelta del numero dei numeri da estrarre
-        
+        Estrazione e = new Estrazione(4,4);
         // Istanza ed avvio del thread Estrazione
-       
+       e.run();
         // Istanza di alcuni thread Giocatore
        
         // Avvio dei thread Giocatori
