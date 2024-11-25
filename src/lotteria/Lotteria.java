@@ -18,12 +18,19 @@ public class Lotteria {
         // Scelta del numero dei numeri da estrarre
         Estrazione e = new Estrazione(4,4);
         // Istanza ed avvio del thread Estrazione
-       e.run();
+        e.run();
         // Istanza di alcuni thread Giocatore
-       
+        Giocatore g1 = new Giocatore(1,"Robert", e);
+        Giocatore g2 = new Giocatore(2,"Mattia", e);
+        Giocatore g3 = new Giocatore(3,"Luca", e);
+        Giocatore g4 = new Giocatore(4,"Mario", e);
         // Avvio dei thread Giocatori
-       
+        g1.run();
+        g2.run();
+        g3.run();
+        g4.run();
         // Comunicazione fine gioco
+        e.stampaVincitori();
     }
 }
    

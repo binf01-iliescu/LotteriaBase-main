@@ -13,14 +13,27 @@ import java.util.Random;
  */
 public class Estrazione extends Thread {
     // attributi
+    public int[][] numeri_estratti;
+    public int n;
+    public int m;
+    public int currVincente = 0;
+
+    public Giocatore[] vincenti;
+    public Random rnd = new Random();
     
-    /**
-     * 
-     * Metodo costruttore
-     */   
-    public Estrazione() {
+    public Estrazione(int n, int m) {
+        numeri_estratti = new int[n][m];
+        this.n = n;
+        this.m = m;
         // popolamento matrice numeri estratti
-        // inizializzazione array vincitori
+        
+        for(int i = 0; i<n;i++){
+            for(int j=0; j < m; j++){
+                this.numeri_estratti[i][j] = rnd.nextInt(100);
+            }
+        }
+         // inizializzazione array vincitori
+        this.vincenti = new Giocatore[3];
     }
 
     /**
@@ -29,6 +42,21 @@ public class Estrazione extends Thread {
     */
     public void stampaMatrice() {
        // stampa matrice dei numeri estratti
+       String row;
+       for(int i = 0; i<this.n;i++){
+           row = "";
+            for(int j=0; j < this.m; j++){
+                if(this.numeri_estratti[i][j] < 10){
+                    row += " |  " + this.numeri_estratti[i][j];
+                }
+                else{
+                    row += " | " + this.numeri_estratti[i][j];
+                }
+                
+            }
+            System.out.println(row + " |");
+       }
+           
     }
     
     /**
@@ -37,14 +65,31 @@ public class Estrazione extends Thread {
     */
     public void stampaVincitori() {
         // stampa array dei vincitori
+        for(int i = 0; i < 3; i++){
+            System.out.println(this.vincenti[i]);
         }
+    }
 
     /**
     * 
     * Metodo per verificare il numero scelto dal giocatore e determinare i vincitori
+    * 
+    * @param numero
+    * @param g
+    * @return boolean
     */
-    public void verifica(int numero, int idGiocatore) {
-           
+    public boolean verifica(int numero, Giocatore g) {
+        boolean trovato = false;
+        for(int i = 0; i<this.n;i++){
+            for(int j=0; j < this.m; j++){
+                if (this.numeri_estratti[i][j] == numero){
+                    this.vincenti[this.currVincente] = g;
+                    this.currVincente += 1;
+                    trovato = true;
+                }           
+            }
+        }
+        return trovato;
     }
 
     /**
@@ -54,6 +99,7 @@ public class Estrazione extends Thread {
     public void run() {
         // stampa iniziale
         // estrazione dei numeri
+        this.stampaMatrice();
         // stampa matrice
         // stampa finale
     }
