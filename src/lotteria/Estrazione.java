@@ -86,6 +86,7 @@ public class Estrazione extends Thread {
                     this.vincenti[this.currVincente] = g;
                     this.currVincente += 1;
                     trovato = true;
+                    break;
                 }           
             }
         }
